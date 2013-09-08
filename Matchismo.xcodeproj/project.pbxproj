@@ -21,6 +21,8 @@
 		903B877017CE961A00B34D60 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 903B875217CE961A00B34D60 /* UIKit.framework */; };
 		903B877817CE961A00B34D60 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 903B877617CE961A00B34D60 /* InfoPlist.strings */; };
 		903B877A17CE961A00B34D60 /* MatchismoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 903B877917CE961A00B34D60 /* MatchismoTests.m */; };
+		90444F9717D920EA00604CA7 /* CardMatchingGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 90444F9617D920EA00604CA7 /* CardMatchingGame.m */; };
+		908D648317DCFFC50007903D /* Flip.m in Sources */ = {isa = PBXBuildFile; fileRef = 908D648217DCFFC50007903D /* Flip.m */; };
 		90C9DBD617D3D33A007314CB /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C9DBD517D3D33A007314CB /* Card.m */; };
 		90C9DBDA17D3D488007314CB /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C9DBD917D3D488007314CB /* Deck.m */; };
 		90C9DBDD17D3DDCC007314CB /* PlayingCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C9DBDC17D3DDCC007314CB /* PlayingCard.m */; };
@@ -57,6 +59,10 @@
 		903B877517CE961A00B34D60 /* MatchismoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MatchismoTests-Info.plist"; sourceTree = "<group>"; };
 		903B877717CE961A00B34D60 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		903B877917CE961A00B34D60 /* MatchismoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchismoTests.m; sourceTree = "<group>"; };
+		90444F9517D920EA00604CA7 /* CardMatchingGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardMatchingGame.h; path = Model/CardMatchingGame.h; sourceTree = "<group>"; };
+		90444F9617D920EA00604CA7 /* CardMatchingGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardMatchingGame.m; path = Model/CardMatchingGame.m; sourceTree = "<group>"; };
+		908D648117DCFFC50007903D /* Flip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flip.h; path = Model/Flip.h; sourceTree = "<group>"; };
+		908D648217DCFFC50007903D /* Flip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Flip.m; path = Model/Flip.m; sourceTree = "<group>"; };
 		90C9DBD417D3D33A007314CB /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Card.h; path = Model/Card.h; sourceTree = "<group>"; };
 		90C9DBD517D3D33A007314CB /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Card.m; path = Model/Card.m; sourceTree = "<group>"; };
 		90C9DBD817D3D488007314CB /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Deck.h; path = Model/Deck.h; sourceTree = "<group>"; };
@@ -168,6 +174,10 @@
 		90C9DBD717D3D402007314CB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				908D648117DCFFC50007903D /* Flip.h */,
+				908D648217DCFFC50007903D /* Flip.m */,
+				90444F9517D920EA00604CA7 /* CardMatchingGame.h */,
+				90444F9617D920EA00604CA7 /* CardMatchingGame.m */,
 				90C9DBDB17D3DDCC007314CB /* PlayingCard.h */,
 				90C9DBDC17D3DDCC007314CB /* PlayingCard.m */,
 				90C9DBDE17D3E5C1007314CB /* PlayingCardDeck.h */,
@@ -281,7 +291,9 @@
 				90C9DBDD17D3DDCC007314CB /* PlayingCard.m in Sources */,
 				90C9DBDA17D3D488007314CB /* Deck.m in Sources */,
 				903B875F17CE961A00B34D60 /* CardGameAppDelegate.m in Sources */,
+				908D648317DCFFC50007903D /* Flip.m in Sources */,
 				903B876517CE961A00B34D60 /* CardGameViewController.m in Sources */,
+				90444F9717D920EA00604CA7 /* CardMatchingGame.m in Sources */,
 				90C9DBE017D3E5C1007314CB /* PlayingCardDeck.m in Sources */,
 				903B875B17CE961A00B34D60 /* main.m in Sources */,
 				90C9DBD617D3D33A007314CB /* Card.m in Sources */,
