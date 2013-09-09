@@ -27,12 +27,7 @@
 }
 
 - (NSString *)description {
-    NSMutableArray *cardsContent = [[NSMutableArray alloc] init];
     NSString *description = @"";
-    
-    for (Card *card in self.cards) {
-        [cardsContent addObject:card.contents];
-    }
     
     if (self.cards.count == 1) {
         Card *card = [self.cards lastObject];
