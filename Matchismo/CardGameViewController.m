@@ -17,12 +17,16 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *gameTypeSwitch;
 @end
 
 @implementation CardGameViewController
 
 - (CardMatchingGame *)game {
-    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:self.cardButtons.count usingDeck:[[PlayingCardDeck alloc] init]];
+    NSInteger numberOfCardsInMatch = (self.gameTypeSwitch.selectedSegmentIndex == 1) ? 2 : 3;
+    if (!_game) _game = [[[CardMatchingGame alloc] initWithCardCount:self.cardButtons.count
+                                                           usingDeck:[[PlayingCardDeck alloc] init]
+                                                numberOfCardsInMatch:numberOfCardsInMatch] init];
     return _game;
 }
 

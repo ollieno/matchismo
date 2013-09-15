@@ -14,14 +14,29 @@
 
 - (int)match:(NSArray *)otherCards
 {
-    int score = 0;
-    if (otherCards.count == 1) {
-        PlayingCard *otherCard = [otherCards lastObject];
+    int score = 0 ;
+    int suitMatchCount = 0;
+    int rankMatchCount = 0;
+
+    for (PlayingCard *otherCard in otherCards) {
         if ([otherCard.suit isEqualToString:self.suit]) {
-            score = 1;
-        } else if (otherCard.rank == self.rank) {
-            score = 4;
+            suitMatchCount++;
         }
+        if (otherCard.rank == self.rank)
+        {
+            rankMatchCount++;
+        }
+    }
+    // if the suitMatchCount is equal to the amount of otherCards
+    // We have a complete match on suit.
+    // Same goes for rank
+    if (suitMatchCount == otherCards.count)
+    {
+        // match by suits
+        score = 1 * otherCards.count;
+    }
+    if (rankMatchCount == otherCards.count) {
+        score = 4 * otherCards.count;
     }
     
     return score;

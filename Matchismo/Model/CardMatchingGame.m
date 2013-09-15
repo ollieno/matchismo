@@ -12,6 +12,7 @@
 @interface CardMatchingGame()
 @property (strong,nonatomic) NSMutableArray *cards;
 @property (nonatomic) int score;
+@property (nonatomic) int matchCount;
 @property (strong, nonatomic) NSMutableArray *flipHistory;
 @end
 
@@ -35,8 +36,12 @@
     return _flipHistory;
 }
 
--(id) initWithCardCount:(NSInteger)cardCount usingDeck:(Deck *)deck {
+-(id) initWithCardCount:(NSInteger)cardCount
+              usingDeck:(Deck *)deck
+   numberOfCardsInMatch:(NSInteger)matchCount {
+    
     if (self = [super init]) {
+        self.matchCount = matchCount;
         for (int i=0; i<cardCount;i++) {
             Card *card = [deck drawRandomCard];
             if (!card) {
@@ -58,6 +63,7 @@
 - (void)flipCardAtIndex:(NSUInteger)index
 {
     Card *card = [self cardAtIndex:index];
+    NSMutableArray *otherCards = [[NSMutableArray alloc] init];
     
     if (!card.isUnplayable) {
         // this is going to be a flip
@@ -65,14 +71,18 @@
         if (!card.isFaceUp) {
             for (Card *otherCard in self.cards) {
                 if (otherCard.isFaceUp && !otherCard.unplayable) {
-                    int matchScore = [card match:@[otherCard]];
+                    [otherCards addObject:otherCard];
+                }
+            }
+            if (otherCards.count == self.matchCount) {
+                int matchScore = [card match:otherCards];
+                for (Card *otherCard in otherCards) {
                     if (matchScore) {
                         otherCard.unplayable = YES;
                         card.unplayable = YES;
                         flip.score = matchScore * MATCH_BONUS
                         flip.match = YES;
                         self.score += flip.score;
-
                     } else {
                         otherCard.faceUp = NO;
                         flip.score = -MISMATCH_PENALTY;
@@ -82,11 +92,11 @@
                     [flip.cards addObject:otherCard];
                 }
             }
-            self.score -= FLIP_COST;
+            card.faceUp = !card.isFaceUp;
+            [flip.cards addObject:card];
+            [self.flipHistory addObject:flip];
         }
-        card.faceUp = !card.isFaceUp;
-        [flip.cards addObject:card];
-        [self.flipHistory addObject:flip];
+        self.score -= FLIP_COST;
     }
 }
 
