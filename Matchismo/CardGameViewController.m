@@ -18,26 +18,39 @@
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *gameTypeSwitch;
+@property (strong, nonatomic) UIImage *cardBackImage;
 @end
 
 @implementation CardGameViewController
 
 - (CardMatchingGame *)game {
-    NSInteger numberOfCardsInMatch = (self.gameTypeSwitch.selectedSegmentIndex == 1) ? 2 : 3;
+    NSInteger numberOfCardsInMatch = (self.gameTypeSwitch.selectedSegmentIndex == 0) ? 2 : 3;
     if (!_game) _game = [[[CardMatchingGame alloc] initWithCardCount:self.cardButtons.count
                                                            usingDeck:[[PlayingCardDeck alloc] init]
                                                 numberOfCardsInMatch:numberOfCardsInMatch] init];
     return _game;
 }
 
+- (UIImage *)cardBackImage {
+    if (!_cardBackImage) {
+        _cardBackImage = [UIImage imageNamed:@"CardBack.jpg"];
+    }
+    return _cardBackImage;
+}
+
 - (void)setCardButtons:(NSArray *)cardButtons
 {
     _cardButtons = cardButtons;
+    for (UIButton *cardButton in _cardButtons) {
+        [cardButton setTitle:@"" forState:UIControlStateNormal];
+        cardButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
+    }
     [self updateUI];
 }
 
 - (void) updateUI {
     self.statusLabel.text = @"";
+    self.gameTypeSwitch.enabled = !self.game.isStarted;
     for (UIButton *cardButton in self.cardButtons) {
         Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
         [cardButton setTitle:card.contents forState:UIControlStateSelected];
@@ -46,6 +59,12 @@
         cardButton.enabled = !card.isUnplayable;
         cardButton.alpha = card.isUnplayable ? 0.3 : 1.0;
         self.scoreLabel.text = [NSString stringWithFormat:@"Score : %d", self.game.score];
+        if (!card.isFaceUp) {
+            [cardButton setImage:self.cardBackImage forState:UIControlStateNormal];
+        } else {
+            [cardButton setImage:nil forState:UIControlStateNormal];
+        }
+        
     }
     if (self.game.flipHistory.count) {
         self.statusLabel.text = [NSString stringWithFormat:@"%@",[self.game.flipHistory lastObject]];
@@ -61,6 +80,10 @@
 - (IBAction)resetButton {
     self.game = nil;
     [self updateUI];
+}
+- (IBAction)gameTypeSwitch:(UISegmentedControl *)sender {
+    int index = sender.selectedSegmentIndex;
+    self.game.cardsInMatch = (index==0) ? 2 : 3;
 }
 
 - (void)viewDidLoad

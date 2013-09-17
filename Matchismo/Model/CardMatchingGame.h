@@ -21,5 +21,7 @@
 
 @property (nonatomic,readonly) NSMutableArray *flipHistory;
 @property (nonatomic,readonly) int score;
+@property (nonatomic) int cardsInMatch;
+@property (nonatomic,readonly, getter = isStarted) BOOL started;
 
 @end
